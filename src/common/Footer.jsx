@@ -8,7 +8,7 @@ const Footer = () => {
   const lines = [
     "💻 Looking for someone to git commit to.",
     "⚡ Let's merge our branches and resolve conflicts together.",
-    "🖤 My love language? Clean code & pull requests.",
+    "💓  My love language? Clean code & pull requests.",
     "🔥 Full-stack in love, backend in feelings.",
     "🕶️ Searching for my pair programming partner for life.",
     "💾 I promise I won't ghost you… unless my server crashes.",
