@@ -7,7 +7,7 @@ const Footer = () => {
   // Cheesy lines array
   const lines = [
     "💻 Looking for someone to git commit to.",
-    "⚡ Let's merge our branches and resolve conflicts together.",
+    "⚡ Let's merge our branches and resolve conflicts.",
     "💓  My love language? Clean code & pull requests.",
     "🔥 Full-stack in love, backend in feelings.",
     "🕶️ Searching for my pair programming partner for life.",
