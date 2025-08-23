@@ -17,33 +17,31 @@ const Card = ({ user }) => {
   const [isFlipping, setIsFlipping] = useState(false);
 
   const handleReq = async (status, userId) => {
-    // Prevent double clicks
     if (loading[status] || isFlipping) return;
 
-    try {
-      setLoading((prev) => ({ ...prev, [status]: true }));
-      setIsFlipping(true);
+    setLoading((prev) => ({ ...prev, [status]: true }));
+    setIsFlipping(true);
 
-      // Add flip animation delay
-      setTimeout(async () => {
+    setTimeout(async () => {
+      try {
         const res = await axios.post(
           `${BASE_URL}/request/send/${status}/${userId}`,
           {},
           { withCredentials: true }
         );
-        
+
         console.log(`${status} request sent:`, res.data);
-        
-        // Remove user from feed after successful request
+
+        // remove from redux feed (pass id string)
         dispatch(removeUserFromFeed(userId));
-      }, 300);
-      
-    } catch (err) {
-      console.error(`Error sending ${status} request:`, err);
-      setIsFlipping(false);
-    } finally {
-      setLoading((prev) => ({ ...prev, [status]: false }));
-    }
+      } catch (err) {
+        console.error(`Error sending ${status} request:`, err);
+      } finally {
+        // stop loading + flip state after request completes
+        setLoading((prev) => ({ ...prev, [status]: false }));
+        setIsFlipping(false);
+      }
+    }, 300);
   };
 
   return (

@@ -1,17 +1,27 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addFeed } from "../utils/feedSlice";
+import { setFeed,removeUserFromFeed } from "../utils/feedSlice";
 import { useEffect, useRef, useState } from "react";
 import Card from "../common/Card";
 import { Filter, X, Search, Users, Settings, ChevronLeft, ChevronRight, RefreshCcwDot,  } from "lucide-react";
 
 const Feed = () => {
-  const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
-  
+  const feed = useSelector((s) => s.feed); // should be an array now
+
   // local feed used for rendering (avoids relying on slice behaviour)
   const [localFeed, setLocalFeed] = useState([]);
+  
+  // Keep localFeed in sync with store.feed so UI updates immediately when slice changes
+  useEffect(() => {
+    if (Array.isArray(feed)) {
+      setLocalFeed(feed);
+      // adjust activeIndex if current index is out of bounds after removal
+      setActiveIndex((idx) => Math.min(idx, Math.max(0, (feed?.length || 1) - 1)));
+    }
+  }, [feed]);
+
   // remember last query filters used for pagination
   const currentQueryRef = useRef({});
   // abort controller ref to cancel inflight requests
@@ -72,7 +82,7 @@ const Feed = () => {
 
       const data = res.data?.data || [];
       setLocalFeed(data);
-      dispatch(addFeed(data));
+      dispatch(setFeed(data));
       setPagination(res.data?.pagination || null);
       setFilters(res.data?.filters || null);
       setActiveIndex(0); // reset to first card on reload
