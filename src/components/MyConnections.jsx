@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BASE_URL } from '../utils/constant'
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import { Link } from 'react-router-dom';
 
 const MyConnections = () => {
   const connectionsData = useSelector((store) => store.connections);
@@ -112,32 +113,13 @@ const MyConnections = () => {
 
                 {/* Right side - Actions */}
                 <div className="flex items-center space-x-2">
-                  <button className="btn btn-primary btn-sm">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <Link to={`/toChat/${connection._id}`} className="btn btn-primary btn-sm">
+                    <button><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-2.697-.413l-3.147 1.049a.75.75 0 01-.94-.94l1.049-3.147A8.955 8.955 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" />
-                    </svg>
-                  </button>
+                    </svg></button>
+                  </Link>
 
-                  <button className="btn btn-ghost btn-sm">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </button>
-
-                  <div className="dropdown dropdown-end">
-                    <button className="btn btn-ghost btn-sm">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zM12 13a1 1 0 110-2 1 1 0 010 2zM12 20a1 1 0 110-2 1 1 0 010 2z" />
-                      </svg>
-                    </button>
-                    <ul className="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-lg w-40 border border-base-300">
-                      <li>
-                        <button className="text-error hover:bg-error hover:text-error-content">
-                          Remove Friend
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+                  
                 </div>
               </div>
             </div>

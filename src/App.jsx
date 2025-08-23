@@ -8,6 +8,7 @@ import appStore from "./utils/appStore"; // default import
 import Feed from "./components/Feed";
 import MyConnections from "./components/MyConnections";
 import Inbox from "./components/Inbox";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<AuthForm />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/myConnections" element={<MyConnections />} />
+            <Route path="/toChat/:targetUserId" element={<Chat />} />
             <Route path="/pendingRequests" element={<Inbox />} />
           </Route>
         </Routes>
